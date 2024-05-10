@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  app:
+    # Build the image using the Dockerfile in the current directory
+    build: .
+    # Mount the current directory as a volume in the container for live code updates
+    volumes:
+      - .:/usr/src/app
+    # Expose port 3000 to the host
+    ports:
+      - "7000:7000"
+
