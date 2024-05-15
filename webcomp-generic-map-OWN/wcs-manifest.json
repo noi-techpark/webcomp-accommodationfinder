@@ -1,0 +1,83 @@
+{
+  "title": "Generic Map",
+  "description": "Generic Map to access the Open Data Hub Mobility API v2 (with Ninja)",
+  "descriptionAbstract": "Generic Map to access the Open Data Hub Mobility",
+  "license": "AGPL-3.0-or-later",
+  "repositoryUrl": "https://github.com/noi-techpark/webcomp-generic-map.git",
+  "shortName": "generic-map",
+  "copyrightHolders": [
+    {
+      "name": "NOI",
+      "email": "info@noi.bz.it",
+      "organization": "NOI S.p.A",
+      "organizationUrl": "https://noi.bz.it"
+    }
+  ],
+  "authors": [
+    {
+      "name": "Peter Moser",
+      "email": "p.moser@noi.bz.it",
+      "organization": "NOI S.p.A",
+      "organizationUrl": "https://noi.bz.it"
+    }
+  ],
+  "image": "wcs-logo.png",
+  "searchTags": ["map"],
+  "dist": {
+    "basePath": "dist",
+    "files": [
+      "map_widget.min.js"
+    ]
+  },
+  "configuration": {
+    "tagName": "map-widget",
+    "options": [
+      {
+        "key": "domain",
+        "type": "select",
+        "options": {
+          "values": [
+            "mobility"
+          ],
+          "default": "mobility"
+        }
+      },
+      {
+        "key": "station-types",
+        "type": "multiselect",
+        "required": false,
+        "options": {
+          "values": [
+            "Bicycle",
+            "Bicyclestationbay",
+            "BikesharingStation",
+            "BluetoothStation",
+            "CarpoolingHub",
+            "CarpoolingService",
+            "CarpoolingUser",
+            "CarsharingCar",
+            "CarsharingStation",
+            "Covid-19",
+            "CreativeIndustry",
+            "EChargingPlug",
+            "EChargingStation",
+            "EnvironmentStation",
+            "LinkStation",
+            "MeteoStation",
+            "Mobilestation",
+            "NOI-Place",
+            "ParkingSensor",
+            "ParkingStation",
+            "RWISstation",
+            "Streetstation",
+            "traffic",
+            "TrafficSensor",
+            "Trafficstation",
+            "TrafficStreetFactor",
+            "VMS"
+          ]
+        }
+      }
+    ]
+  }
+}
