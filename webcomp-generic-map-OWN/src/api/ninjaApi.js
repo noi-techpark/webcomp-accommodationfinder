@@ -25,16 +25,18 @@ export async function callGet(path, params) {
 		});
 }
 
-export async function fetchAccommodations(type) {
-    try {
-        const response = await callGet("/Accommodation"+ (type || '*'), {
-            limit: 200,
-            distinct: true,
-            origin: config.ORIGIN
-        });
-        return response.data;
-    } catch (error) {
-        console.log(error);
-        throw error;
-    }
+
+export async function fetchAccommodations() {
+    return callGet("/Accommodation", {
+		limit: 200,
+		distinct: true,
+		origin: config.ORIGIN
+	})
+	.then(response => {
+		this.stations = response.data;
+	})
+	.catch(e => {
+		console.log(e)
+		throw e;
+	});
 }

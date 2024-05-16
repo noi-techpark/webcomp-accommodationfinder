@@ -5,7 +5,7 @@ import style__leaflet from 'leaflet/dist/leaflet.css';
 import style__markercluster from 'leaflet.markercluster/dist/MarkerCluster.css';
 import style from './scss/main.scss';
 import { getStyle } from './utils.js';
-import { fetchAccommodations } from './api/ninjaApi.js'; // Update import
+import { fetchAccommodations } from './api/ninjaApi.js'; 
 
 class MapWidget extends LitElement {
 
@@ -72,7 +72,7 @@ class MapWidget extends LitElement {
         ];
 
         let icon = L.divIcon({
-          html: '<div class="marker" style="background-color: blue"></div>', // Update icon styling if needed
+          html: '<div class="marker" style="background-color: blue"></div>', 
           iconSize: L.point(25, 25)
         });
 
