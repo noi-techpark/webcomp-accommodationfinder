@@ -61,8 +61,10 @@ class MapWidget extends LitElement {
   async drawMap() {
     await this.fetchAccommodations(this.propAccommodationTypes);
     let columns_layer_array = [];
-
-    this.accommodations.map(item => {
+    console.log("Coordinate: ", this.accommodations.Items[0].GpsInfo[0].Latitude);
+    console.log("Coordinate: ", this.accommodations.Items[0].GpsInfo[0].Longitude);
+    
+    this.accommodations.Items.map(item => {
 
       // Check if GpsInfo exists and has elements
       if (item.GpsInfo && item.GpsInfo.length > 0) {

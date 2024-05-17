@@ -19,4 +19,3 @@ services:
     ports:
       - "8999:8000"
     tty: true
-  

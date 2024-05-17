@@ -27,16 +27,16 @@ export async function callGet(path, params) {
 
 
 export async function fetchAccommodations() {
-    return callGet("/Accommodation", {
-		limit: 200,
-		distinct: true,
-		origin: config.ORIGIN
-	})
-	.then(response => {
-		this.stations = response.data;
-	})
-	.catch(e => {
-		console.log(e)
-		throw e;
-	});
+    try {
+        const response = await callGet("/Accommodation", {
+            limit: 200,
+            distinct: true,
+            origin: config.ORIGIN
+        });
+        console.log("Fetched Accommodations: ", response);
+        this.accommodations = response;
+    } catch (e) {
+        console.error(e);
+        throw e;
+    }
 }
