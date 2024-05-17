@@ -29,7 +29,7 @@ export async function callGet(path, params) {
 export async function fetchAccommodations() {
     try {
         const response = await callGet("/Accommodation", {
-            limit: 200,
+            pagesize: 200,
             distinct: true,
             origin: config.ORIGIN
         });
