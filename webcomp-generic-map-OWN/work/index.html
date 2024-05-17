@@ -1,68 +1,85 @@
-<!--
-SPDX-FileCopyrightText: NOI Techpark <digital@noi.bz.it>
-
-SPDX-License-Identifier: AGPL-3.0-or-later
--->
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <title>Map</title>
     <style>
-        body {
+        html, body {
             margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
             font-family: Arial, sans-serif;
         }
-        .icon-menu {
+        .sidebar {
             cursor: pointer;
             position: absolute;
             top: 10px;
-            left: 10px;
+            right: 10px;
             z-index: 1000;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        .sidebar-text {
+            margin-right: 10px;
+            font-size: 14px;
+            font-weight: bold;
         }
         .icon-image {
-            width: 30px;  
+            width: 35px; 
+            padding-bottom: 5px; 
             height: auto;
         }
         .dropdown-content {
             display: none;
             position: absolute;
-            top: 50px;  
-            left: 10px;
+            top: 75px;
+            right: 10px;
             background-color: #f9f9f9;
             min-width: 160px;
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
             z-index: 1000;
             padding: 12px 16px;
+            border-radius: 5px;
         }
-        .dropdown-content a {
+        .dropdown-content option,
+        .dropdown-content label {
             color: black;
             padding: 8px 16px;
             text-decoration: none;
             display: block;
             text-align: left;
         }
-        .dropdown-content a:hover {
+        .dropdown-content label:hover {
             background-color: #ddd;
         }
         .map-container {
-            width: 80%;
-            height: 600px;
-            margin: 20px auto;
-            border: 1px solid #ccc;
+            width: 100%;
+            height: 100%;
+            position: relative; 
         }
     </style>
 </head>
 <body>
-    <div class="icon-menu" onclick="toggleDropdown()">
-        <img src="menu-icon.png" alt="Menu" class="icon-image">
-    </div>
-    <div class="dropdown-content" id="myDropdown">
-        <a href="#">Link 1</a>
-        <a href="#">Link 2</a>
-        <a href="#">Link 3</a>
-    </div>
     <div class="map-container">
+        <div class="sidebar" onclick="toggleDropdown()">
+            <span class="sidebar-text">Search for accommodation</span>
+            <img src="./assets/search.png" alt="Filter" class="icon-image">
+        </div>
+        <div id = "hallo">
+            <div class="dropdown-content" id="myDropdown">
+                <label onclick="selectChange(0)">Hotel Pension</label>
+                <label onclick="selectChange(1)">Bed&Breakfast</label>
+                <label onclick="selectChange(2)">Camping</label>
+                <label onclick="selectChange(3)">Farm</label>
+                <label onclick="selectChange(4)">Mountain</label>
+                <label onclick="selectChange(5)">Apartment</label>
+            </div>
+        </div>
         <map-widget station-types=""></map-widget>
     </div>
     <script>
@@ -74,6 +91,34 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 dropdown.style.display = "block";
             }
         }
+
+        var categories = {
+            "0": [{ value: '0', text: 'Bmw' }, { value: '1', text: 'Benz' }],
+            "1": [{ value: '2', text: 'Playstation' }, { value: '3', text: 'Xbox' }, { value: '4', text: 'Wii' }],
+            "2": [{ value: '5', text: 'Dell' }, { value: '7', text: 'Acer' }],
+            "3": [{ value: '2', text: 'Playstation' }, { value: '3', text: 'Xbox' }, { value: '4', text: 'Wii' }],
+            "4": [{ value: '2', text: 'Playstation' }, { value: '3', text: 'Xbox' }, { value: '4', text: 'Wii' }],
+            "5": [{ value: '2', text: 'Playstation' }, { value: '3', text: 'Xbox' }, { value: '4', text: 'Wii' }]
+        };
+
+        function selectChange(selectedValue) {
+            var p = document.createElement('select');
+            p.id = 'p';
+
+            var opzione1 = document.createElement('option');
+            opzione1.value = 'valore';
+            opzione1.text = 'text';
+            p.appendChild(opzione1);
+
+            var old = document.getElementById('myDropdown');
+            old.replaceWith(p);
+
+            hallo.appendChild(p)
+        }
+
+
+        
+
     </script>
     <script src="./scripts/map_widget.js"></script>
 </body>
