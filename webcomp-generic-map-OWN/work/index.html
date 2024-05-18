@@ -46,21 +46,51 @@
             padding: 12px 16px;
             border-radius: 5px;
         }
-        .dropdown-content option,
-        .dropdown-content label {
-            color: black;
-            padding: 8px 16px;
-            text-decoration: none;
+        .dropdown-content ul, .dropdown-content label {
             display: block;
-            text-align: left;
+            width: 100%;
+            padding: 5px 0;
+            list-style-type: none;
         }
-        .dropdown-content label:hover {
+        .dropdown-content ul {
+            padding-left: 0;
+        }
+        .dropdown-content li {
+            padding: 5px 0;
+            cursor: pointer;
+        }
+        .dropdown-content li:hover {
             background-color: #ddd;
+        }
+        .separator {
+            border-top: 1px solid #ddd;
+            margin: 10px 0;
+        }
+        .more-filters-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
         }
         .map-container {
             width: 100%;
             height: 100%;
             position: relative; 
+        }
+        .button-container {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .button {
+            padding: 5px 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -70,56 +100,87 @@
             <span class="sidebar-text">Search for accommodation</span>
             <img src="./assets/search.png" alt="Filter" class="icon-image">
         </div>
-        <div id = "hallo">
-            <div class="dropdown-content" id="myDropdown">
-                <label onclick="selectChange(0)">Hotel Pension</label>
-                <label onclick="selectChange(1)">Bed&Breakfast</label>
-                <label onclick="selectChange(2)">Camping</label>
-                <label onclick="selectChange(3)">Farm</label>
-                <label onclick="selectChange(4)">Mountain</label>
-                <label onclick="selectChange(5)">Apartment</label>
-            </div>
+        <div class="dropdown-content" id="myDropdown">
+            <ul id="accommodationList">
+                <li data-value="0">Hotel Pension</li>
+                <li data-value="1">Bed&Breakfast</li>
+                <li data-value="2">Camping</li>
+                <li data-value="3">Farm</li>
+                <li data-value="4">Mountain</li>
+                <li data-value="5">Apartment</li>
+            </ul>
         </div>
         <map-widget station-types=""></map-widget>
     </div>
+
     <script>
         function toggleDropdown() {
             var dropdown = document.getElementById("myDropdown");
-            if (dropdown.style.display === "block") {
-                dropdown.style.display = "none";
-            } else {
-                dropdown.style.display = "block";
-            }
+            dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
         }
 
         var categories = {
-            "0": [{ value: '0', text: 'Bmw' }, { value: '1', text: 'Benz' }],
-            "1": [{ value: '2', text: 'Playstation' }, { value: '3', text: 'Xbox' }, { value: '4', text: 'Wii' }],
-            "2": [{ value: '5', text: 'Dell' }, { value: '7', text: 'Acer' }],
-            "3": [{ value: '2', text: 'Playstation' }, { value: '3', text: 'Xbox' }, { value: '4', text: 'Wii' }],
-            "4": [{ value: '2', text: 'Playstation' }, { value: '3', text: 'Xbox' }, { value: '4', text: 'Wii' }],
-            "5": [{ value: '2', text: 'Playstation' }, { value: '3', text: 'Xbox' }, { value: '4', text: 'Wii' }]
+            "0": [{value: '0', text: 'Bmw'}, {value: '1', text: 'Benz'}],
+            "1": [{value: '2', text: 'Playstation'}, {value: '3', text: 'Xbox'}, {value: '4', text: 'Wii'}],
+            "2": [{value: '5', text: 'Dell'}, {value: '7', text: 'Acer'}],
+            "3": [{value: '8', text: 'Tractor'}, {value: '9', text: 'Plow'}],
+            "4": [{value: '10', text: 'Cabin'}, {value: '11', text: 'Chalet'}],
+            "5": [{value: '12', text: 'Studio'}, {value: '13', text: 'Duplex'}]
         };
 
-        function selectChange(selectedValue) {
-            var p = document.createElement('select');
-            p.id = 'p';
-
-            var opzione1 = document.createElement('option');
-            opzione1.value = 'valore';
-            opzione1.text = 'text';
-            p.appendChild(opzione1);
-
-            var old = document.getElementById('myDropdown');
-            old.replaceWith(p);
-
-            hallo.appendChild(p)
+        function attachListClickListener() {
+            document.getElementById('accommodationList').addEventListener('click', function(event) {
+                if (event.target.tagName === 'LI') {
+                    populateCheckboxes(event.target.getAttribute('data-value'));
+                }
+            });
         }
 
+        function populateCheckboxes(selectedValue) {
+            var dropdown = document.getElementById('myDropdown');
+            var checkboxesHtml = '<ul id="accommodationList">' + dropdown.querySelector('ul').innerHTML + '</ul>';
 
-        
+            checkboxesHtml += '<div class="separator"></div>';
+            checkboxesHtml += '<div class="more-filters-title">More filters</div>';
 
+            categories[selectedValue].forEach(function(item) {
+                checkboxesHtml += '<label><input type="checkbox" value="' + item.value + '"> ' + item.text + '</label>';
+            });
+
+            checkboxesHtml += '<div class="button-container">';
+            checkboxesHtml += '<button class="button" onclick="confirm()">Confirm</button>';
+            checkboxesHtml += '<button class="button" onclick="reset()">Reset</button>';
+            checkboxesHtml += '</div>';
+
+            dropdown.innerHTML = checkboxesHtml;
+            attachListClickListener(); 
+        }
+
+        function confirm() {
+            var checkboxes = document.querySelectorAll('#myDropdown input[type="checkbox"]:checked');
+            var selectedValues = Array.from(checkboxes).map(cb => cb.value);
+            console.log('Confirmed choices:', selectedValues);
+        }
+
+        function reset() {
+            var dropdown = document.getElementById('myDropdown');
+            var initialHtml = `
+                <ul id="accommodationList">
+                    <li data-value="0">Hotel Pension</li>
+                    <li data-value="1">Bed&Breakfast</li>
+                    <li data-value="2">Camping</li>
+                    <li data-value="3">Farm</li>
+                    <li data-value="4">Mountain</li>
+                    <li data-value="5">Apartment</li>
+                </ul>`;
+            dropdown.innerHTML = initialHtml;
+            attachListClickListener();  
+        }
+
+        document.addEventListener('DOMContentLoaded', attachListClickListener);
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./scripts/map_widget.js"></script>
 </body>
 </html>
+
