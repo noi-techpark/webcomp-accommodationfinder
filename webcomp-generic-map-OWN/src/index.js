@@ -6,7 +6,7 @@ import style__markercluster from 'leaflet.markercluster/dist/MarkerCluster.css';
 import style from './scss/main.scss';
 import { getStyle } from './utils.js';
 import { fetchAccommodations } from './api/ninjaApi.js'; 
-import { fetchFilteredAccommodations } from './api/ninjaApi.js'; 
+//import { clearMarkers } from './api/ninjaApi.js'; 
 
 class MapWidget extends LitElement {
 
@@ -117,14 +117,7 @@ class MapWidget extends LitElement {
   }
 
 
-  clearMarkers() {
-    // Check if the marker cluster layer exists and clear it
-    if (this.layer_columns) {
-      this.layer_columns.clearLayers();
-      console.log("Empty map on desire");
-    }
-  }
-  
+  ///CLEAR MARKERS INTO NINJAAPI.JS
   
 
   

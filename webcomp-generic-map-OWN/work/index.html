@@ -113,6 +113,9 @@
         <map-widget station-types=""></map-widget>
     </div>
 
+    <script src="../src/api/ninjaApi.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./scripts/map_widget.js"></script>
     <script>
         function toggleDropdown() {
             var dropdown = document.getElementById("myDropdown");
@@ -120,17 +123,16 @@
         }
 
         var categories = {
-            "0": [{value: '0', text: 'Bmw'}, {value: '1', text: 'Benz'}],
-            "1": [{value: '2', text: 'Playstation'}, {value: '3', text: 'Xbox'}, {value: '4', text: 'Wii'}],
-            "2": [{value: '5', text: 'Dell'}, {value: '7', text: 'Acer'}],
-            "3": [{value: '8', text: 'Tractor'}, {value: '9', text: 'Plow'}],
-            "4": [{value: '10', text: 'Cabin'}, {value: '11', text: 'Chalet'}],
-            "5": [{value: '12', text: 'Studio'}, {value: '13', text: 'Duplex'}]
+            "0": [{value: '0', text: 'All inclusive'}, {value: '1', text: 'Pets allowed'}, {value: '1', text: 'Gourmet Food'}],
+            "1": [{value: '2', text: 'Pets allowed'}, {value: '3', text: 'Urban vibes'}],
+            "2": [{value: '5', text: 'Breakfast offered'}, {value: '7', text: 'Swimming pool'}, {value: '7', text: 'Hiking'}],
+            "3": [{value: '8', text: 'Breakfast offered'}, {value: '9', text: 'WiFi'}, {value: '7', text: 'Dolomites'}],
+            "4": [{value: '10', text: 'Half board'}, {value: '9', text: 'WiFi'}, {value: '11', text: 'Ski Resort'}],
+            "5": [{value: '12', text: 'Garage'}, {value: '13', text: 'Urban vibes'}]
         };
 
 
 
-//////////////////////////////////////////
         function attachListClickListener() {
             document.getElementById('accommodationList').addEventListener('click', function(event) {
                 if (event.target.tagName === 'LI') {
@@ -143,6 +145,8 @@
                 }
             });
         }
+
+
         function populateCheckboxes(selectedValue) {
             var dropdown = document.getElementById('myDropdown');
             var checkboxesHtml = '<ul id="accommodationList">' + dropdown.querySelector('ul').innerHTML + '</ul>';
@@ -164,13 +168,19 @@
         }
 
     
-
+        function clearMarkers() {
+            // Check if the marker cluster layer exists and clear it
+            if (this.layer_columns) {
+            this.layer_columns.clearLayers();
+            console.log("Empty map on desire");
+            }
+        }
             
-      
+      ///////////////////////////7
         function confirm() {
             var selectedListItem = document.querySelector('#accommodationList li.selected');
             if (!selectedListItem) {
-                console.log("Nessun elemento selezionato nella lista.");
+                console.log("No elemented was selected from the given list.");
                 return;
             }
             var selectedValue = selectedListItem.getAttribute('data-value');
@@ -178,9 +188,18 @@
             var checkboxes = document.querySelectorAll('#myDropdown input[type="checkbox"]:checked');
             var selectedCheckboxes = Array.from(checkboxes).map(cb => cb.value);
 
+            //fetchFilteredAccommodations(selectedValue, selectedCheckboxes[0], selectedCheckboxes[1], selectedCheckboxes[2])  
+            clearMarkers();
+
             console.log('Selected Category:', selectedValue);
             console.log('Selected Filters:', selectedCheckboxes);
+
+            
         }
+
+
+        
+
 
 
 
@@ -204,8 +223,7 @@
 
         document.addEventListener('DOMContentLoaded', attachListClickListener);
     </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="./scripts/map_widget.js"></script>
+    
 </body>
 </html>
 

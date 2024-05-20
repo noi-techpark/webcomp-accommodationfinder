@@ -43,6 +43,14 @@ export async function fetchAccommodations() {
 }
 
 
+export function clearMarkers() {
+    // Check if the marker cluster layer exists and clear it
+    if (this.layer_columns) {
+      this.layer_columns.clearLayers();
+      console.log("Empty map on desire");
+    }
+}
+
 
 export async function fetchFilteredAccommodations(type_filter, board_filter = null, feature_filter = null, 
                                                             theme_filter = null) {
@@ -66,3 +74,6 @@ export async function fetchFilteredAccommodations(type_filter, board_filter = nu
         throw e;
     }
 }
+
+
+console.log("ninjaApi.js is loaded");
