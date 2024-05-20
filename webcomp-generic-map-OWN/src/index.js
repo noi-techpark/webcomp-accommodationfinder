@@ -88,6 +88,7 @@ class MapWidget extends LitElement {
 
         columns_layer_array.push(marker);
       }
+
     });
 
     this.visibleAccommodations = columns_layer_array.length;
@@ -108,7 +109,6 @@ class MapWidget extends LitElement {
     this.layer_columns.addLayer(columns_layer);
     /** Add the cluster group to the map */
     this.map.addLayer(this.layer_columns);
-
   }
 
   async firstUpdated() {
@@ -116,6 +116,18 @@ class MapWidget extends LitElement {
     this.drawMap();
   }
 
+
+  clearMarkers() {
+    // Check if the marker cluster layer exists and clear it
+    if (this.layer_columns) {
+      this.layer_columns.clearLayers();
+      console.log("Empty map on desire");
+    }
+  }
+  
+  
+
+  
   render() {
     return html`
       <style>

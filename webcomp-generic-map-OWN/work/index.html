@@ -128,14 +128,21 @@
             "5": [{value: '12', text: 'Studio'}, {value: '13', text: 'Duplex'}]
         };
 
+
+
+//////////////////////////////////////////
         function attachListClickListener() {
             document.getElementById('accommodationList').addEventListener('click', function(event) {
                 if (event.target.tagName === 'LI') {
+                    // Rimuovere la classe 'selected' da tutti gli elementi li e aggiungerla all'elemento cliccato
+                    var listItems = document.querySelectorAll('#accommodationList li');
+                    listItems.forEach(li => li.classList.remove('selected'));
+                    event.target.classList.add('selected');
+
                     populateCheckboxes(event.target.getAttribute('data-value'));
                 }
             });
         }
-
         function populateCheckboxes(selectedValue) {
             var dropdown = document.getElementById('myDropdown');
             var checkboxesHtml = '<ul id="accommodationList">' + dropdown.querySelector('ul').innerHTML + '</ul>';
@@ -156,11 +163,29 @@
             attachListClickListener(); 
         }
 
+    
+
+            
+      
         function confirm() {
+            var selectedListItem = document.querySelector('#accommodationList li.selected');
+            if (!selectedListItem) {
+                console.log("Nessun elemento selezionato nella lista.");
+                return;
+            }
+            var selectedValue = selectedListItem.getAttribute('data-value');
+
             var checkboxes = document.querySelectorAll('#myDropdown input[type="checkbox"]:checked');
-            var selectedValues = Array.from(checkboxes).map(cb => cb.value);
-            console.log('Confirmed choices:', selectedValues);
+            var selectedCheckboxes = Array.from(checkboxes).map(cb => cb.value);
+
+            console.log('Selected Category:', selectedValue);
+            console.log('Selected Filters:', selectedCheckboxes);
         }
+
+
+
+
+
 
         function reset() {
             var dropdown = document.getElementById('myDropdown');
