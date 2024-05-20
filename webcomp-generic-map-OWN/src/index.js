@@ -6,6 +6,7 @@ import style__markercluster from 'leaflet.markercluster/dist/MarkerCluster.css';
 import style from './scss/main.scss';
 import { getStyle } from './utils.js';
 import { fetchAccommodations } from './api/ninjaApi.js'; 
+import { fetchFilteredAccommodations } from './api/ninjaApi.js'; 
 
 class MapWidget extends LitElement {
 
@@ -40,7 +41,7 @@ class MapWidget extends LitElement {
       "red",
       "orange"
     ];
-
+    
     /* Requests */
     this.fetchAccommodations = fetchAccommodations.bind(this); 
   }
@@ -59,7 +60,7 @@ class MapWidget extends LitElement {
   }
 
   async drawMap() {
-    await this.fetchAccommodations(this.propAccommodationTypes);
+    await this.fetchAccommodations();
     let columns_layer_array = [];
     console.log("Coordinate: ", this.accommodations.Items[0].GpsInfo[0].Latitude);
     console.log("Coordinate: ", this.accommodations.Items[0].GpsInfo[0].Longitude);

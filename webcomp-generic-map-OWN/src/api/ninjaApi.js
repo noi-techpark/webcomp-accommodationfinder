@@ -29,7 +29,8 @@ export async function callGet(path, params) {
 export async function fetchAccommodations() {
     try {
         const response = await callGet("/Accommodation", {
-            pagesize: 200,
+			pagenumber: 1,
+            pagesize: 300, // to be incremented
             distinct: true,
             origin: config.ORIGIN
         });
@@ -37,6 +38,31 @@ export async function fetchAccommodations() {
         this.accommodations = response;
     } catch (e) {
         console.error(e);
+        throw e;
+    }
+}
+
+
+
+export async function fetchFilteredAccommodations(type_filter, board_filter = null, feature_filter = null, 
+                                                            theme_filter = null) {
+    try {
+        const params = {
+			pagenumber: 1,
+            pagesize: 300,
+			typefilter: type_filter,
+			boardfilter: board_filter,
+			featurefilter: feature_filter,
+			themefilter: theme_filter,
+            distinct: true,
+            origin: config.ORIGIN,
+        };
+        
+        const response = await callGet("/Accommodation", params);
+        console.log("Fetched Filtered Accommodations: ", response);
+        return response;
+    } catch (e) {
+        console.error("Error fetching filtered accommodations:", e);
         throw e;
     }
 }
