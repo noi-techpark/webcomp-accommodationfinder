@@ -46,7 +46,7 @@
         function attachListClickListener() {
             document.getElementById('accommodationList').addEventListener('click', function(event) {
                 if (event.target.tagName === 'LI') {
-                    // Rimuovere la classe 'selected' da tutti gli elementi li e aggiungerla all'elemento cliccato
+                    // Remove the 'selected' class from all elements and add it to the clicked element
                     var listItems = document.querySelectorAll('#accommodationList li');
                     listItems.forEach(li => li.classList.remove('selected'));
                     event.target.classList.add('selected');
@@ -76,19 +76,16 @@
             attachListClickListener(); 
         }
 
-            
-
-      ///////////////////////////7
         function confirm() {
             var selectedListItem = document.querySelector('#accommodationList li.selected');
             if (!selectedListItem) {
-                console.log("No elemented was selected from the given list.");
+                console.log("No element was selected from the given list.");
                 return;
             }
             var selectedValue = selectedListItem.getAttribute('data-value');
 
-            var checkboxes = document.querySelectorAll('#myDropdown input[type="checkbox"]:checked');
-            var selectedCheckboxes = Array.from(checkboxes).map(cb => cb.value);
+            var checkboxes = document.querySelectorAll('#myDropdown input[type="checkbox"]');
+            var selectedCheckboxes = Array.from(checkboxes).map(cb => cb.checked ? cb.value : null);
 
             //fetchFilteredAccommodations(selectedValue, selectedCheckboxes[0], selectedCheckboxes[1], selectedCheckboxes[2])  
 
@@ -101,9 +98,9 @@
             var mapWidget = document.querySelector('map-widget');
             if (mapWidget) {
                 mapWidget.clearMarkers();
-                console.log('Markers cleared successfully.');
+                //console.log('Markers cleared successfully.');
             } else {
-                console.log('Error: Map widget not found.');
+                //console.log('Error: Map widget not found.');
             }
         }
         
