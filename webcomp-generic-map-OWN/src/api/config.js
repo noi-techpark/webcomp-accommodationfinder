@@ -4,5 +4,5 @@
 
 export default {
 	API_BASE_URL: 'https://tourism.api.opendatahub.com/v1',
-	ORIGIN: 'webcomp-generic-map'
+	ORIGIN: 'AccomodationFinder'
 };

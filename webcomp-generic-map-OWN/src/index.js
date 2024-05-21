@@ -9,15 +9,6 @@ import { fetchAccommodations, fetchFilteredAccommodations } from './api/ninjaApi
 
 class MapWidget extends LitElement {
 
-  static get properties() {
-    return {
-      propAccommodationTypes: { 
-        type: String,
-        attribute: 'accommodation-types'
-      },
-    };
-  }
-
   constructor() {
     super();
 
@@ -29,11 +20,10 @@ class MapWidget extends LitElement {
 
     /* Internationalization */
     this.language_default = 'en';
-    this.language = 'de';
+    this.language = 'it';
 
     /* Data fetched from Open Data Hub */
     this.accommodations = []; 
-    //this.filteredAccommodations = [];
     this.accommodationTypes = {}; 
     this.colors = [
       "green",
@@ -44,8 +34,6 @@ class MapWidget extends LitElement {
     
     /* Requests */
     this.fetchAccommodations = fetchAccommodations.bind(this); 
-    //this.fetchFilteredAccommodations = fetchFilteredAccommodations.bind(this); 
-
   }
 
   async initializeMap() {
@@ -61,16 +49,13 @@ class MapWidget extends LitElement {
     }).addTo(this.map);
   }
 
-
-
   async drawMap() {
     await this.fetchAccommodations();
     let columns_layer_array = [];
-    console.log("Coordinate: ", this.accommodations.Items[0].GpsInfo[0].Latitude);
-    console.log("Coordinate: ", this.accommodations.Items[0].GpsInfo[0].Longitude);
+    //console.log("Coordinate: ", this.accommodations.Items[0].GpsInfo[0].Latitude);
+    //console.log("Coordinate: ", this.accommodations.Items[0].GpsInfo[0].Longitude);
     
     this.accommodations.Items.map(item => {
-
       // Check if GpsInfo exists and has elements
       if (item.GpsInfo && item.GpsInfo.length > 0) {
         const pos = [
@@ -153,10 +138,6 @@ class MapWidget extends LitElement {
     this.map.addLayer(this.layer_columns);
   }
   
-
-
-
-
   async firstUpdated() {
     this.initializeMap();
     this.drawMap();
@@ -187,5 +168,4 @@ class MapWidget extends LitElement {
 if (!window.customElements.get('map-widget')) {
   window.customElements.define('map-widget', MapWidget);
 }
-
 

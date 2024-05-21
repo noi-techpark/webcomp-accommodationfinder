@@ -5,6 +5,7 @@
 import axios from "axios";
 import config from "./config";
 
+
 export async function callGet(path, params) {
     console.log("call = " + config.API_BASE_URL + path);
 	console.log("call params = ");
@@ -25,12 +26,11 @@ export async function callGet(path, params) {
 		});
 }
 
-
 export async function fetchAccommodations() {
     try {
         const response = await callGet("/Accommodation", {
 			pagenumber: 1,
-            pagesize: 300, // to be incremented
+            pagesize: 800, // to be incremented, it is low just for rapidity of fetching operations
             distinct: true,
             origin: config.ORIGIN
         });
@@ -42,7 +42,6 @@ export async function fetchAccommodations() {
     }
 }
 
-
 export function clearMarkers() {
     // Check if the marker cluster layer exists and clear it
     if (this.layer_columns) {
@@ -50,7 +49,6 @@ export function clearMarkers() {
       console.log("Empty map on desire");
     }
 }
-
 
 export async function fetchFilteredAccommodations(type_filter, board_filter, feature_filter, theme_filter) {
     alert("Fetch filtered data");
@@ -68,13 +66,12 @@ export async function fetchFilteredAccommodations(type_filter, board_filter, fea
         
         const response = await callGet("/Accommodation", params);
         console.log("Fetched Filtered Accommodations: ", response);
-        //this.accommodations = response;
-        alert("GET method is working correctly!");
+        //alert("GET method is working correctly!");
         return response;
+
     } catch (e) {
         console.error("Error fetching filtered accommodations:", e);
         throw e;
     }
 }
-
 

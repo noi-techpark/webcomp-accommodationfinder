@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Map</title>
+    <title>Accommodation Finder</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -21,25 +21,26 @@
                 <li data-value="64">Apartment</li>
             </ul>
         </div>
-        <map-widget station-types=""></map-widget>
+        <map-widget></map-widget>
     </div>
     
     <script src="../src/api/ninjaApi.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./scripts/map_widget.js"></script>
     <script>
+
         function toggleDropdown() {
             var dropdown = document.getElementById("myDropdown");
             dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
         }
 
         var categories = {
-            "1": [{value: '0', text: 'All inclusive'}, {value: '512', text: 'Pets allowed'}, {value: '1', text: 'Gourmet Food'}],
+            "1": [{value: '16', text: 'All inclusive'}, {value: '512', text: 'Pets allowed'}, {value: '1', text: 'Gourmet Food'}],
             "2": [{value: '512', text: 'Pets allowed'}, {value: '128', text: 'Urban vibes'}],
             "8": [{value: '2', text: 'Breakfast offered'}, {value: '4', text: 'Swimming pool'}, {value: '32', text: 'Hiking'}],
             "4": [{value: '2', text: 'Breakfast offered'}, {value: '64', text: 'WiFi'}, {value: '1024', text: 'Dolomites'}],
             "32": [{value: '4', text: 'Half board'}, {value: '64', text: 'WiFi'}, {value: '256', text: 'Ski Resort'}],
-            "64": [{value: '12', text: 'Garage'}, {value: '128', text: 'Urban vibes'}]
+            "64": [{value: '16', text: 'Garage'}, {value: '128', text: 'Urban vibes'}]
         };
 
         
