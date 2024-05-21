@@ -116,6 +116,14 @@ class MapWidget extends LitElement {
     this.drawMap();
   }
 
+  clearMarkers() {
+    // Check if the marker cluster layer exists and clear it
+    if (this.layer_columns) {
+      this.layer_columns.clearLayers();
+      console.log("Empty map on desire");
+    }
+  }
+
   ///CLEAR MARKERS INTO NINJAAPI.JS
   
 

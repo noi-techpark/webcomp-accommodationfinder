@@ -77,3 +77,4 @@ export async function fetchFilteredAccommodations(type_filter, board_filter = nu
 
 
 console.log("ninjaApi.js is loaded");
+
