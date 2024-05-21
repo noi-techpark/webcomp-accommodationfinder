@@ -26,10 +26,10 @@ class MapWidget extends LitElement {
     this.accommodations = []; 
     this.accommodationTypes = {}; 
     this.colors = [
-      "green",
-      "blue",
-      "red",
-      "orange"
+      "#0097B2",
+      "#FFBD59",
+      "#94485F",
+      "7A8148"
     ];
     
     /* Requests */
@@ -64,7 +64,7 @@ class MapWidget extends LitElement {
         ];
 
         let icon = L.divIcon({
-          html: '<div class="marker" style="background-color: blue"></div>', 
+          html: '<div class="marker" style="background-color: #FFBD59"></div>', 
           iconSize: L.point(25, 25)
         });
 
@@ -102,7 +102,7 @@ class MapWidget extends LitElement {
 
   
   async drawMapWithFilters(type_filter, board_filter, feature_filter, theme_filter) {
-    alert("In map drawing process");
+    //alert("In map drawing process");
     var data = await fetchFilteredAccommodations(type_filter, board_filter, feature_filter, theme_filter);  
   
     let columns_layer_array = [];
@@ -112,7 +112,7 @@ class MapWidget extends LitElement {
         const pos = [item.GpsInfo[0].Latitude, item.GpsInfo[0].Longitude];
         
         let icon = L.divIcon({
-          html: '<div class="marker" style="background-color: blue"></div>', 
+          html: '<div class="marker" style="background-color: #FFBD59"></div>', 
           iconSize: L.point(25, 25)
         });
         let popupContent = `<b>${item.AccoDetail.en.Name}</b><br>${item.AccoDetail.en.City}, ${item.AccoDetail.en.Street}`;

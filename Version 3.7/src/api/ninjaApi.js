@@ -51,7 +51,7 @@ export function clearMarkers() {
 }
 
 export async function fetchFilteredAccommodations(type_filter, board_filter, feature_filter, theme_filter) {
-    alert("Fetch filtered data");
+    //alert("Fetch filtered data");
     try {
         const params = {
 			pagenumber: 1,
