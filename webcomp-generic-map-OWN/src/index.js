@@ -116,7 +116,6 @@ class MapWidget extends LitElement {
     this.drawMap();
   }
 
-
   ///CLEAR MARKERS INTO NINJAAPI.JS
   
 

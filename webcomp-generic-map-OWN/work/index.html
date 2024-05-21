@@ -112,10 +112,12 @@
         </div>
         <map-widget station-types=""></map-widget>
     </div>
-
+    
     <script src="../src/api/ninjaApi.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./scripts/map_widget.js"></script>
+    
+
     <script>
         function toggleDropdown() {
             var dropdown = document.getElementById("myDropdown");
@@ -131,8 +133,7 @@
             "5": [{value: '12', text: 'Garage'}, {value: '13', text: 'Urban vibes'}]
         };
 
-
-
+        
         function attachListClickListener() {
             document.getElementById('accommodationList').addEventListener('click', function(event) {
                 if (event.target.tagName === 'LI') {
@@ -167,15 +168,8 @@
             attachListClickListener(); 
         }
 
-    
-        function clearMarkers() {
-            // Check if the marker cluster layer exists and clear it
-            if (this.layer_columns) {
-            this.layer_columns.clearLayers();
-            console.log("Empty map on desire");
-            }
-        }
             
+
       ///////////////////////////7
         function confirm() {
             var selectedListItem = document.querySelector('#accommodationList li.selected');
@@ -189,7 +183,13 @@
             var selectedCheckboxes = Array.from(checkboxes).map(cb => cb.value);
 
             //fetchFilteredAccommodations(selectedValue, selectedCheckboxes[0], selectedCheckboxes[1], selectedCheckboxes[2])  
-            clearMarkers();
+            var mapWidget = document.querySelector('map-widget');
+            if (mapWidget) {
+                mapWidget.clearMarkers();
+                console.log('Markers cleared successfully.');
+            } else {
+                console.log('Error: Map widget not found.');
+            }
 
             console.log('Selected Category:', selectedValue);
             console.log('Selected Filters:', selectedCheckboxes);
