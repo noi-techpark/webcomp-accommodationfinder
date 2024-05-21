@@ -74,7 +74,3 @@ export async function fetchFilteredAccommodations(type_filter, board_filter = nu
         throw e;
     }
 }
-
-
-console.log("ninjaApi.js is loaded");
-

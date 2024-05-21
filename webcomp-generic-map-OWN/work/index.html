@@ -86,9 +86,17 @@
 
             var checkboxes = document.querySelectorAll('#myDropdown input[type="checkbox"]');
             var selectedCheckboxes = Array.from(checkboxes).map(cb => cb.checked ? cb.value : null);
-
-            //fetchFilteredAccommodations(selectedValue, selectedCheckboxes[0], selectedCheckboxes[1], selectedCheckboxes[2])  
-
+           
+            var mapWidget = document.querySelector('map-widget');
+            if (mapWidget) {
+                //console.log(mapWidget)
+                if(selectedValue==1 || selectedValue==5){
+                    mapWidget.fetchFilteredAccommodations(selectedValue, null, selectedCheckboxes[0], selectedCheckboxes[1]);
+                } else {
+                    mapWidget.fetchFilteredAccommodations(selectedValue, selectedCheckboxes[0], selectedCheckboxes[1], selectedCheckboxes[2]);
+                }
+            }
+    
             console.log('Selected Category:', selectedValue);
             console.log('Selected Filters:', selectedCheckboxes);
         }
