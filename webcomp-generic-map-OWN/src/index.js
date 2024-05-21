@@ -33,6 +33,7 @@ class MapWidget extends LitElement {
 
     /* Data fetched from Open Data Hub */
     this.accommodations = []; 
+    //this.filteredAccommodations = [];
     this.accommodationTypes = {}; 
     this.colors = [
       "green",
@@ -43,7 +44,7 @@ class MapWidget extends LitElement {
     
     /* Requests */
     this.fetchAccommodations = fetchAccommodations.bind(this); 
-    this.fetchFilteredAccommodations = fetchFilteredAccommodations.bind(this); 
+    //this.fetchFilteredAccommodations = fetchFilteredAccommodations.bind(this); 
 
   }
 
@@ -59,6 +60,8 @@ class MapWidget extends LitElement {
       attribution: this.map_attribution
     }).addTo(this.map);
   }
+
+
 
   async drawMap() {
     await this.fetchAccommodations();
@@ -112,6 +115,47 @@ class MapWidget extends LitElement {
     this.map.addLayer(this.layer_columns);
   }
 
+  
+  async drawMapWithFilters() {
+    alert("In map drawing process");
+    var data = await fetchFilteredAccommodations(2);  
+  
+    let columns_layer_array = [];
+
+    data.map(item => {
+      if (item.GpsInfo && item.GpsInfo.length > 0) {
+        const pos = [item.GpsInfo[0].Latitude, item.GpsInfo[0].Longitude];
+        
+        let icon = L.divIcon({
+          html: '<div class="marker" style="background-color: blue"></div>', 
+          iconSize: L.point(25, 25)
+        });
+        let popupContent = `<b>${item.AccoDetail.en.Name}</b><br>${item.AccoDetail.en.City}, ${item.AccoDetail.en.Street}`;
+        let popup = L.popup().setContent(popupContent);
+        let marker = L.marker(pos, {icon: icon}).bindPopup(popup);
+        columns_layer_array.push(marker);
+      }
+    });
+  
+    this.visibleAccommodations = columns_layer_array.length;
+    let columns_layer = L.layerGroup(columns_layer_array);
+    this.layer_columns = new L.MarkerClusterGroup({
+      showCoverageOnHover: false,
+      chunkedLoading: true,
+      iconCreateFunction: function (cluster) {
+        return L.divIcon({
+          html: '<div class="marker_cluster__marker">' + cluster.getChildCount() + '</div>',
+          iconSize: L.point(36, 36)
+        });
+      }
+    });
+    this.layer_columns.addLayer(columns_layer);
+    this.map.addLayer(this.layer_columns);
+  }
+  
+
+
+
   async firstUpdated() {
     this.initializeMap();
     this.drawMap();
@@ -142,3 +186,5 @@ class MapWidget extends LitElement {
 if (!window.customElements.get('map-widget')) {
   window.customElements.define('map-widget', MapWidget);
 }
+
+

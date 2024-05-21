@@ -52,8 +52,8 @@ export function clearMarkers() {
 }
 
 
-export async function fetchFilteredAccommodations(type_filter, board_filter = null, feature_filter = null, 
-                                                            theme_filter = null) {
+export async function fetchFilteredAccommodations(type_filter, board_filter = null, feature_filter = null, theme_filter = null) {
+    alert("Fetch filtered data");
     try {
         const params = {
 			pagenumber: 1,
@@ -68,9 +68,13 @@ export async function fetchFilteredAccommodations(type_filter, board_filter = nu
         
         const response = await callGet("/Accommodation", params);
         console.log("Fetched Filtered Accommodations: ", response);
+        //this.accommodations = response;
+        alert("GET method is working correctly!");
         return response;
     } catch (e) {
         console.error("Error fetching filtered accommodations:", e);
         throw e;
     }
 }
+
+

@@ -76,6 +76,8 @@
             attachListClickListener(); 
         }
 
+
+        //////////////////////////////////
         function confirm() {
             var selectedListItem = document.querySelector('#accommodationList li.selected');
             if (!selectedListItem) {
@@ -90,11 +92,11 @@
             var mapWidget = document.querySelector('map-widget');
             if (mapWidget) {
                 //console.log(mapWidget)
-                if(selectedValue==1 || selectedValue==5){
-                    mapWidget.fetchFilteredAccommodations(selectedValue, null, selectedCheckboxes[0], selectedCheckboxes[1]);
-                } else {
-                    mapWidget.fetchFilteredAccommodations(selectedValue, selectedCheckboxes[0], selectedCheckboxes[1], selectedCheckboxes[2]);
-                }
+            
+                mapWidget.clearMarkers();
+                mapWidget.drawMapWithFilters();
+
+                alert("Everything was fetched");
             }
     
             console.log('Selected Category:', selectedValue);
