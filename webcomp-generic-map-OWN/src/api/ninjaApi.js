@@ -52,7 +52,7 @@ export function clearMarkers() {
 }
 
 
-export async function fetchFilteredAccommodations(type_filter, board_filter = null, feature_filter = null, theme_filter = null) {
+export async function fetchFilteredAccommodations(type_filter, board_filter, feature_filter, theme_filter) {
     alert("Fetch filtered data");
     try {
         const params = {
