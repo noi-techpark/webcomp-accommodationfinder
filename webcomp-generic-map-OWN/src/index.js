@@ -122,7 +122,7 @@ class MapWidget extends LitElement {
   
     let columns_layer_array = [];
 
-    data.map(item => {
+    data.Items.map(item => {
       if (item.GpsInfo && item.GpsInfo.length > 0) {
         const pos = [item.GpsInfo[0].Latitude, item.GpsInfo[0].Longitude];
         
@@ -153,6 +153,7 @@ class MapWidget extends LitElement {
     this.map.addLayer(this.layer_columns);
   }
   
+
 
 
 
