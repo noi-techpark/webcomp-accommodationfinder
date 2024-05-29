@@ -27,7 +27,7 @@ components into any website.
 
 ## Usage
 
-Include the Javascript file `dist/map_widget.min.js` in your HTML and define the web component like this:
+Include the Javascript file `dist/map_accommodation_widget.min.js` in your HTML and define the web component like this:
 
 ```html
 <map-widget domain="mobility"></map-widget>

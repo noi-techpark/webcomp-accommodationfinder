@@ -1,10 +1,9 @@
 {
-  "title": "Generic Map",
-  "description": "Generic Map to access the Open Data Hub Mobility API v2 (with Ninja)",
-  "descriptionAbstract": "Generic Map to access the Open Data Hub Mobility",
+  "title": "Accommodation Finder",
+  "description": "Web component designed to help users find accommodations in Bolzano and surrounding area. The web interface allows users to filter properties of the available accommodations based on their own preferencies.",
+  "descriptionAbstract": "A web component including accommodations around South Tyrol",
   "license": "AGPL-3.0-or-later",
-  "repositoryUrl": "https://github.com/noi-techpark/webcomp-generic-map.git",
-  "shortName": "generic-map",
+  "repositoryUrl": "https://github.com/MrVannu/AccommodationFinder",
   "copyrightHolders": [
     {
       "name": "NOI",
@@ -15,67 +14,51 @@
   ],
   "authors": [
     {
-      "name": "Peter Moser",
-      "email": "p.moser@noi.bz.it",
-      "organization": "NOI S.p.A",
-      "organizationUrl": "https://noi.bz.it"
+      "name": "Luca Vannuccini",
+      "email": "lvannuccini@unibz.it",
+      "organization": "None",
+      "organizationUrl": "https://github.com/MrVannu"
+    },
+    {
+      "name": "Violetta Fazzi",
+      "email": "vfazzi@unibz.it",
+      "organization": "none",
+      "organizationUrl": "https://github.com/Vaiolo"
     }
   ],
   "image": "wcs-logo.png",
-  "searchTags": ["map"],
+  "searchTags": ["map", "accommodation", "accommodations", "trip", "housing", "South Tyrol"],
   "dist": {
     "basePath": "dist",
     "files": [
-      "map_widget.min.js"
-    ]
+      "map_accommodation_widget.min.js"
+    ],
+    "scripts": []
   },
   "configuration": {
-    "tagName": "map-widget",
+    "tagName": "accommodation-finder-widget",
     "options": [
       {
-        "key": "domain",
+        "key": "language",
         "type": "select",
+        "label": "Language",
+        "required": true,
         "options": {
           "values": [
-            "mobility"
+            "de-DE",
+            "en-US",
+            "it-IT"
           ],
-          "default": "mobility"
+          "default": "en-US"
         }
       },
       {
-        "key": "station-types",
-        "type": "multiselect",
+        "key": "display-accommodations",
+        "type": "bool",
+        "label": "Display Nearby Accommodations",
         "required": false,
         "options": {
-          "values": [
-            "Bicycle",
-            "Bicyclestationbay",
-            "BikesharingStation",
-            "BluetoothStation",
-            "CarpoolingHub",
-            "CarpoolingService",
-            "CarpoolingUser",
-            "CarsharingCar",
-            "CarsharingStation",
-            "Covid-19",
-            "CreativeIndustry",
-            "EChargingPlug",
-            "EChargingStation",
-            "EnvironmentStation",
-            "LinkStation",
-            "MeteoStation",
-            "Mobilestation",
-            "NOI-Place",
-            "ParkingSensor",
-            "ParkingStation",
-            "RWISstation",
-            "Streetstation",
-            "traffic",
-            "TrafficSensor",
-            "Trafficstation",
-            "TrafficStreetFactor",
-            "VMS"
-          ]
+          "default": false
         }
       }
     ]
