@@ -1,0 +1,56 @@
+{
+  "title": "Accommodation Finder",
+  "description": "Web component designed to help users find accommodations in Bolzano and surrounding area. The web interface allows users to filter properties of the available accommodations based on their own preferencies.",
+  "descriptionAbstract": "A web component including accommodations around South Tyrol",
+  "license": "AGPL-3.0-or-later",
+  "repositoryUrl": "https://github.com/noi-techpark/webcomp-accommodationfinder",
+  "copyrightHolders": [
+    {
+      "name": "NOI",
+      "email": "info@noi.bz.it",
+      "organization": "NOI S.p.A",
+      "organizationUrl": "https://noi.bz.it"
+    }
+  ],
+  "authors": [
+    {
+      "name": "Luca Vannuccini",
+      "email": "lvannuccini@unibz.it",
+      "organization": "None",
+      "organizationUrl": "https://github.com/MrVannu"
+    },
+    {
+      "name": "Violetta Fazzi",
+      "email": "vfazzi@unibz.it",
+      "organization": "none",
+      "organizationUrl": "https://github.com/Vaiolo"
+    }
+  ],
+  "image": "wcs-logo.png",
+  "searchTags": ["map", "accommodation", "accommodations", "trip", "housing", "South Tyrol"],
+  "dist": {
+    "basePath": "dist",
+    "files": [
+      "map_accommodation_widget.min.js"
+    ],
+    "scripts": []
+  },
+  "configuration": {
+    "tagName": "accommodation-finder-widget",
+    "options": [
+      {
+        "key": "language",
+        "type": "select",
+        "label": "Language",
+        "required": true,
+        "options": {
+          "values": [
+            "en-US",
+            "it-IT"
+          ],
+          "default": "en-US"
+        }
+      }
+    ]
+  }
+}

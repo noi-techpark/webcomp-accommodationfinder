@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Accommodation Finder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="map-container">
+        <div class="sidebar" onclick="toggleDropdown()">
+            <span class="sidebar-text">Search for accommodation</span>
+            <img src="./assets/search.png" alt="Filter" class="icon-image">
+        </div>
+        <div class="dropdown-content" id="myDropdown">
+            <ul id="accommodationList">
+                <li data-value="1">Hotel Pension</li>
+                <li data-value="2">Bed&Breakfast</li>
+                <li data-value="8">Camping</li>
+                <li data-value="4">Farm</li>
+                <li data-value="32">Mountain</li>
+                <li data-value="64">Apartment</li>
+            </ul>
+        </div>
+        <map-widget></map-widget>
+    </div>
+    
+    <script src="../src/api/ninjaApi.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./scripts/map_widget.js"></script>
+    <script>
+
+        function toggleDropdown() {
+            var dropdown = document.getElementById("myDropdown");
+            dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+        }
+
+        // Filters are currently empty since the features are not open data
+        var categories = {
+            "1": [{value: '', text: 'All results'}],
+            "2": [{value: '', text: 'All results'}],
+            "8": [{value: '', text: 'All results'}],
+            "4": [{value: '', text: 'All results'}],
+            "32": [{value: '', text: 'All results'}],
+            "64": [{value: '16', text: 'Garage'}]
+        };
+
+        
+        function attachListClickListener() {
+            document.getElementById('accommodationList').addEventListener('click', function(event) {
+                if (event.target.tagName === 'LI') {
+                    // Remove the 'selected' class from all elements and add it to the clicked element
+                    var listItems = document.querySelectorAll('#accommodationList li');
+                    listItems.forEach(li => li.classList.remove('selected'));
+                    event.target.classList.add('selected');
+
+                    populateCheckboxes(event.target.getAttribute('data-value'));
+                }
+            });
+        }
+
+        function populateCheckboxes(selectedValue) {
+            var dropdown = document.getElementById('myDropdown');
+            var checkboxesHtml = '<ul id="accommodationList">' + dropdown.querySelector('ul').innerHTML + '</ul>';
+
+            checkboxesHtml += '<div class="separator"></div>';
+            checkboxesHtml += '<div class="more-filters-title">More filters</div>';
+
+            categories[selectedValue].forEach(function(item) {
+                checkboxesHtml += '<label><input type="checkbox" value="' + item.value + '"> ' + item.text + '</label>';
+            });
+
+            checkboxesHtml += '<div class="button-container">';
+            checkboxesHtml += '<button class="button" onclick="confirm()">Confirm</button>';
+            checkboxesHtml += '<button class="button" onclick="reset()">Reset</button>';
+            checkboxesHtml += '</div>';
+
+            dropdown.innerHTML = checkboxesHtml;
+            attachListClickListener(); 
+        }
+
+
+        //////////////////////////////////
+        function confirm() {
+            var selectedListItem = document.querySelector('#accommodationList li.selected');
+            if (!selectedListItem) {
+                console.log("No element was selected from the given list.");
+                return;
+            }
+
+            var selectedValue = selectedListItem.getAttribute('data-value');
+
+            var checkboxes = document.querySelectorAll('#myDropdown input[type="checkbox"]');
+            var selectedCheckboxes = Array.from(checkboxes).map(cb => cb.checked ? cb.value : null);
+           
+            var mapWidget = document.querySelector('map-widget');
+            if (mapWidget) {            
+                mapWidget.clearMarkers();
+
+                if(selectedValue == 2 || selectedValue == 64){
+                    mapWidget.drawMapWithFilters(selectedValue, null, selectedCheckboxes[1], selectedCheckboxes[2]);
+                } else {
+                    mapWidget.drawMapWithFilters(selectedValue, selectedCheckboxes[0], selectedCheckboxes[1], selectedCheckboxes[2]);
+                }
+
+                console.log("Everything was fetched");
+            }
+    
+            console.log('Selected Category:', selectedValue);
+            console.log('Selected Filters:', selectedCheckboxes);
+        }
+
+
+        function removeMarkers(){
+            var mapWidget = document.querySelector('map-widget');
+            if (mapWidget) {
+                mapWidget.clearMarkers();
+                //console.log('Markers cleared successfully.');
+            } else {
+                //console.log('Error: Map widget not found.');
+            }
+        }
+        
+
+        function reset() {
+            var dropdown = document.getElementById('myDropdown');
+            var initialHtml = `
+                <ul id="accommodationList">
+                    <li data-value="0">Hotel Pension</li>
+                    <li data-value="1">Bed&Breakfast</li>
+                    <li data-value="2">Camping</li>
+                    <li data-value="3">Farm</li>
+                    <li data-value="4">Mountain</li>
+                    <li data-value="5">Apartment</li>
+                </ul>`;
+            dropdown.innerHTML = initialHtml;
+            attachListClickListener();  
+            removeMarkers();
+        }
+
+        document.addEventListener('DOMContentLoaded', attachListClickListener);
+    </script>
+    
+</body>
+</html>
+

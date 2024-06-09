@@ -36,7 +36,7 @@ After installation, you can use the application as follows:
 
 ## Contributors
 
-The followin contributed actively to the project:
+The following contributed actively to the project:
     
 - Vannuccini Luca
 - Fazzi Violetta
