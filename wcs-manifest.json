@@ -51,15 +51,6 @@
           ],
           "default": "en-US"
         }
-      },
-      {
-        "key": "display-accommodations",
-        "type": "bool",
-        "label": "Display Nearby Accommodations",
-        "required": false,
-        "options": {
-          "default": false
-        }
       }
     ]
   }

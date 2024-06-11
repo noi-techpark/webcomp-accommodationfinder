@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: NOI Techpark <digital@noi.bz.it>
+
+SPDX-License-Identifier: MIT
+-->
+
 # OpenDataHubDay2024 - Accommodation Finder
 
 Welcome to the DataHub2024 **Accommodation Finder** by Vannuccini Luca and Violetta Fazzi!  
@@ -36,7 +42,7 @@ After installation, you can use the application as follows:
 
 ## Contributors
 
-The followin contributed actively to the project:
+The following contributed actively to the project:
     
 - Vannuccini Luca
 - Fazzi Violetta
