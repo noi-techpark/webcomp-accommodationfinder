@@ -4,7 +4,7 @@
   "description": "Web component designed to help users find accommodations in Bolzano and surrounding area. The web interface allows users to filter properties of the available accommodations based on their own preferencies.",
   "descriptionAbstract": "A web component including accommodations around South Tyrol",
   "license": "AGPL-3.0-or-later",
-  "repositoryUrl": "https://github.com/MrVannu/AccommodationFinder",
+  "repositoryUrl": "https://github.com/MrVannu/AccommodationFinder.git",
   "copyrightHolders": [
     {
       "name": "NOI",
