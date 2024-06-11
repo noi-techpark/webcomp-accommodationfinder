@@ -340,6 +340,6 @@ reset() {
 }
 
 if (!window.customElements.get('map-widget')) {
-  window.customElements.define('map-widget', MapWidget);
+  window.customElements.define('accommodation-finder-widget', MapWidget);
 }
 
